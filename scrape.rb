@@ -71,14 +71,11 @@ module Scraper
 				FileUtils.mkdir_p _sim_dir	#Create dir for this sim
 
 				Retryable.retryable(:tries => 3, :on => OpenURI::HTTPError) do #Tries three times. Probably should modify the error for mechanize
-					_file = (Mechanize.new).get _ret[:download_url]
+					_file = (Mechanize.new).get _ret[:download_url]		#dl the file
+					_ret[:file_name]		= _file.filename 			#Need to store the filename for launch
+					_file.save File.join(_sim_dir, _ret[:file_name])	#Save the sim file
 				end
-				_ret[:file_name]		= _file.filename
 
-				#store sims in hashes of url
-				_sim_dir = File.join './bundle', _ret[:url_hash]
-				FileUtils.mkdir_p _sim_dir
-				IO.write File.join(_sim_dir, _ret[:file_name]), _file.content
 			end
 
 			bar.increment
