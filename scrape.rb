@@ -64,10 +64,12 @@ module Scraper
 			_ret[:image_url]		= URI.join(prefix, _simpage.css('.simulation-main-screenshot').first.attribute('src').value).to_s
 			_ret[:version]			= _simpage.css('.sim-version').text.split(' ')[1].to_s
 			###
-			# => Get the file
+			# => Get the files
 			### 
 			unless _ret[:download_url] == :no_url then
-				_file = nil
+				_sim_dir = File.join './bundle', _ret[:url_hash] 
+				FileUtils.mkdir_p _sim_dir	#Create dir for this sim
+
 				Retryable.retryable(:tries => 3, :on => OpenURI::HTTPError) do #Tries three times. Probably should modify the error for mechanize
 					_file = (Mechanize.new).get _ret[:download_url]
 				end
