@@ -53,7 +53,14 @@ module Scraper
 			Retryable.retryable(:tries => 3, :on => OpenURI::HTTPError) do #Tries three times.
 				_simpage = Nokogiri::HTML(open _ret[:url])
 			end
-			_ret[:download_url]		= if _dl = _simpage.css('.sim-download').first then URI.join(prefix, _dl.attribute('href').value).to_s else :no_url end
+
+			_ret[:download_url]		= (
+				if _ret[:type] == :flash then
+					URI.join(prefix, _simpage.css('#simulation-main-link-run-main').attribute('href').value).to_s
+				elsif _dl = _simpage.css('.sim-download').first then 
+					URI.join(prefix, _dl.attribute('href').value).to_s else :no_url 
+				end
+			)
 			_ret[:image_url]		= URI.join(prefix, _simpage.css('.simulation-main-screenshot').first.attribute('src').value).to_s
 			_ret[:version]			= _simpage.css('.sim-version').text.split(' ')[1].to_s
 			###
