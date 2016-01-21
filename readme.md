@@ -1,5 +1,4 @@
 #PhET Scraper
-##?
 Scrapes PhET sim information.
 It also:
  - Downloads the latest sims (+thumbnails)
