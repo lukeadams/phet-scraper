@@ -76,6 +76,12 @@ module Scraper
 					_file.save File.join(_sim_dir, _ret[:file_name])	#Save the sim file
 				end
 
+				#Also need to download image
+				Retryable.retryable(:tries => 3, :on => OpenURI::HTTPError) do #Tries three times. Probably should modify the error for mechanize
+					_image_file = (Mechanize.new).get _ret[:image_url]
+					_ret[:image_file_name] 	= _image_file.filename
+					_image_file.save File.join(_sim_dir, _ret[:image_file_name])
+				end
 			end
 
 			bar.increment
