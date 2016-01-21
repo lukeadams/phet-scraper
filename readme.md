@@ -13,7 +13,3 @@ Initially I was going to use Coffee+Gulp but Ruby+Rake is much more concise for 
 `rake update`
  - places each sim in its own dir (hashes of sim url)
  	- refer to config.yml for what folder is for what sim
-
-##Bundle folder
- - [each sim]: folder, name is hash of sim url
- - config.yml: contains loadable array of sims so you can do somethign with them
