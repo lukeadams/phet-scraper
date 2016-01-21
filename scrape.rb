@@ -90,6 +90,6 @@ module Scraper
 
 		end
 
-		IO.write './config.yml', sims.to_yaml
+		IO.write './bundle/config.yml', sims.to_yaml
 	end
 end
