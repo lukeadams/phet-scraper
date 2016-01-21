@@ -38,7 +38,6 @@ module Scraper
 		_sim_count = _sim_items.length
 
 		bar = ProgressBar.create({:total=>_sim_count, :length=>80, :format=>"[%c/%C]|(%t)"})
-		x = 0
 
 		sims = _sim_items.map { |item|
 			#Generates a rudimentary list
@@ -89,10 +88,3 @@ module Scraper
 		end
 	end
 end
-#sims.each { |sim|
-#	#Download each one?	
-#	#wget sim[:url] => Path::<sim[:name]>
-#	pp sim
-#}
-#Write file
-
