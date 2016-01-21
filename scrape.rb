@@ -72,18 +72,12 @@ module Scraper
 				IO.write File.join(_sim_dir, _ret[:file_name]), _file.content
 			end
 
-
 			bar.increment
 
 			_ret #return it!
 
-		IO.write './config.yml', sims.to_yaml
-	end
-
-	def Scraper.bundle 
-		list = YAML.load IO.read './config.yml'
-		list[0..2].each do |sim|
-
 		end
+
+		IO.write './config.yml', sims.to_yaml
 	end
 end
