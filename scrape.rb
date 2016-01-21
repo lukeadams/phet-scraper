@@ -39,7 +39,7 @@ module Scraper
 
 		bar = ProgressBar.create({:total=>_sim_count, :length=>80, :format=>"[%c/%C]|(%t)"})
 
-		sims = _sim_items.map { |item|
+		sims = _sim_items.map do |item|
 			#Generates a rudimentary list
 			_ret = {}
 			_ret[:name] = item.css('.simulation-list-title').text
@@ -77,7 +77,6 @@ module Scraper
 
 			_ret #return it!
 
-		}
 		IO.write './config.yml', sims.to_yaml
 	end
 
