@@ -50,7 +50,7 @@ module Scraper
 			bar.title = _ret[:name]
 
 			_simpage = nil
-			Retryable.retryable(:tries => 3, :on => OpenURI::HTTPError) do #Tries three times.
+			Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do #Tries three times.
 				_simpage = Nokogiri::HTML(open _ret[:url])
 			end
 
@@ -70,14 +70,14 @@ module Scraper
 				_sim_dir = File.join './bundle', _ret[:url_hash] 
 				FileUtils.mkdir_p _sim_dir	#Create dir for this sim
 
-				Retryable.retryable(:tries => 3, :on => OpenURI::HTTPError) do #Tries three times. Probably should modify the error for mechanize
+				Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do #Tries three times.
 					_file = (Mechanize.new).get _ret[:download_url]		#dl the file
 					_ret[:file_name]		= _file.filename 			#Need to store the filename for launch
 					_file.save File.join(_sim_dir, _ret[:file_name])	#Save the sim file
 				end
 
 				#Also need to download image
-				Retryable.retryable(:tries => 3, :on => OpenURI::HTTPError) do #Tries three times. Probably should modify the error for mechanize
+				Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do 
 					_image_file = (Mechanize.new).get _ret[:image_url]
 					_ret[:image_file_name] 	= _image_file.filename
 					_image_file.save File.join(_sim_dir, _ret[:image_file_name])
