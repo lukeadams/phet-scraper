@@ -29,8 +29,8 @@ module Scraper
 	def Scraper.update
 		FileUtils.rm_rf './bundle'
 		prefix = 'https://phet.colorado.edu/'
-		FileUtils.touch './config.yml'
-		list = YAML.load IO.read './config.yml'
+		#FileUtils.touch './config.yml'
+		#list = YAML.load IO.read './config.yml'
 
 		_sim_page = Nokogiri::HTML(open(URI.join prefix, 'en/simulations'))
 
