@@ -66,23 +66,22 @@ module Scraper
 			###
 			# => Get the files
 			### 
+			_sim_dir = File.join './bundle', _ret[:url_hash] 
+			FileUtils.mkdir_p _sim_dir	#Create dir for this sim
 			unless _ret[:download_url] == :no_url then
-				_sim_dir = File.join './bundle', _ret[:url_hash] 
-				FileUtils.mkdir_p _sim_dir	#Create dir for this sim
-
 				Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do #Tries three times.
 					_file = (Mechanize.new).get _ret[:download_url]		#dl the file
 					_ret[:file_name]		= _file.filename 			#Need to store the filename for launch
 					_file.save File.join(_sim_dir, _ret[:file_name])	#Save the sim file
 				end
-
-				#Also need to download image
-				Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do 
-					_image_file = (Mechanize.new).get _ret[:image_url]
-					_ret[:image_file_name] 	= _image_file.filename
-					_image_file.save File.join(_sim_dir, _ret[:image_file_name])
-				end
 			end
+			#Also need to download image
+			Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do 
+				_image_file = (Mechanize.new).get _ret[:image_url]
+				_ret[:image_file_name] 	= _image_file.filename
+				_image_file.save File.join(_sim_dir, _ret[:image_file_name])
+			end
+			
 
 			bar.increment
 
