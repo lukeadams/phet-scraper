@@ -55,12 +55,22 @@ module Scraper
 			end
 
 			_ret[:download_url]		= (
-				if _ret[:type] == :flash then
-					URI.join(prefix, _simpage.css('#simulation-main-link-run-main').attribute('href').value).to_s
-				elsif _dl = _simpage.css('.sim-download').first then 
+				if _ret[:type] == :flash then #Flash is ... special :/
+					Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do #Tries three times.
+						_play = URI.join(_ret[:url], _simpage.css('#simulation-main-link-run-main').attribute('href').value).to_s
+						pp _ret[:name]
+						pp _play
+						_flash_page = Mechanize.new.get(_play)
+						(URI.join _play, _flash_page.at("embed").attribute('src').value).to_s
+
+					end
+
+				elsif _dl = _simpage.css('#sim-download') then #HTML + java are normal
 					URI.join(prefix, _dl.attribute('href').value).to_s else :no_url 
-				end
+				end					
 			)
+
+
 			_ret[:image_url]		= URI.join(prefix, _simpage.css('.simulation-main-screenshot').first.attribute('src').value).to_s
 			_ret[:version]			= _simpage.css('.sim-version').text.split(' ')[1].to_s
 			###
@@ -81,10 +91,8 @@ module Scraper
 				_ret[:image_file_name] 	= _image_file.filename
 				_image_file.save File.join(_sim_dir, _ret[:image_file_name])
 			end
-			
 
 			bar.increment
-
 			_ret #return it!
 
 		end
