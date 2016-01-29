@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'phet/scraper/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "phet-scraper"
-  spec.version       = Phet::Scraper::VERSION
+  spec.name          = "scraper"
+  spec.version       = Scraper::VERSION
   spec.authors       = ["Luke Adams"]
   spec.email         = ["luke4450@gmail.com"]
 
