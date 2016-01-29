@@ -75,7 +75,7 @@ module Scraper
 			###
 			# => Get the files
 			### 
-			_sim_dir = File.join './bundle', _ret[:url_hash] 
+			_sim_dir = File.join bundle_dir, _ret[:url_hash] 
 			FileUtils.mkdir_p _sim_dir	#Create dir for this sim
 			unless _ret[:download_url] == :no_url then
 				Retryable.retryable(:tries => 3, :on => Errno::ECONNREFUSED) do #Tries three times.
@@ -96,6 +96,6 @@ module Scraper
 
 		end
 
-		IO.write './bundle/config.yml', sims.to_yaml
+		IO.write File.join(bundle_dir, sims.to_yaml)
 	end
 end
