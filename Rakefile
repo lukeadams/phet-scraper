@@ -1,6 +1,7 @@
-require_relative './scrape.rb'
+require "bundler/gem_tasks"
+task :default => :spec
 
 #Fetches new definitions
 task :update do
-	Scraper.update()
+	#Scraper.update()
 end
