@@ -26,8 +26,7 @@ module Scraper
 		end
 	end
 	#Downloads new simulations
-	def Scraper.update
-		FileUtils.rm_rf './bundle'
+	def Scraper.fetch(bundle_dir)
 		prefix = 'https://phet.colorado.edu/'
 		#FileUtils.touch './config.yml'
 		#list = YAML.load IO.read './config.yml'
