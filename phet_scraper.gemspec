@@ -17,4 +17,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
+
+  spec.add_runtime_dependency 'nokogiri'
+  spec.add_runtime_dependency 'retryable'
+  spec.add_runtime_dependency 'mechanize'
+  spec.add_runtime_dependency 'ruby-progressbar'
 end
