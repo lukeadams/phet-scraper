@@ -11,7 +11,7 @@ require 'mechanize'
 
 module PhetScraper
     #Returns type of simulation gives a list of class names
-	def Scraper.get_type(classes)
+	def PhetScraper.get_type(classes)
 		case classes
 			when /sim-badge-html/
 				return :html
@@ -24,7 +24,7 @@ module PhetScraper
 		end
 	end
 	#Downloads new simulations
-	def Scraper.fetch(bundle_dir)
+	def PhetScraper.fetch(bundle_dir)
 		prefix = 'https://phet.colorado.edu/'
 		#FileUtils.touch './config.yml'
 		#list = YAML.load IO.read './config.yml'
