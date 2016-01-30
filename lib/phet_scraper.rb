@@ -1,4 +1,4 @@
-require "phet/scraper/version"
+require 'phet_scraper/version'
 
 require 'nokogiri'
 require 'open-uri'
