@@ -1,5 +1,3 @@
-module Phet
-  module Scraper
-    VERSION = "0.1.0"
-  end
+module PhetScraper
+  VERSION = "0.1.0"
 end

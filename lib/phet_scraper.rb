@@ -9,8 +9,7 @@ require 'fileutils'
 require 'digest'
 require 'mechanize'
 
-module Phet
-  module Scraper
+module PhetScraper
     #Returns type of simulation gives a list of class names
 	def Scraper.get_type(classes)
 		case classes
@@ -95,5 +94,4 @@ module Phet
 
 		IO.write File.join(bundle_dir, sims.to_yaml)
 	end
-  end
 end
