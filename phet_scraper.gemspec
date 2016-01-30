@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'scraper/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "scraper"
-  spec.version       = Scraper::VERSION
+  spec.name          = "phet_scraper"
+  spec.version       = PhetScraper::VERSION
   spec.authors       = ["Luke Adams"]
   spec.email         = ["luke4450@gmail.com"]
 
   spec.summary       = 'Simple script to scrape all PhET sims'
-  spec.homepage      = "https://github.com/lukeadams/phet-scraper"
+  spec.homepage      = "https://github.com/lukeadams/phet_scraper"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
