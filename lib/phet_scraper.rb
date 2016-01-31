@@ -96,7 +96,6 @@ module PhetScraper
 			_ret #return it!
 
 		end
-
-		IO.write File.join(bundle_dir, sims.to_yaml)
+		IO.write File.join(bundle_dir, 'config.yml'), sims.to_yaml
 	end
 end
