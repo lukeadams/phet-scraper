@@ -65,7 +65,7 @@ module PhetScraper
 						_dl = _simpage.css('#sim-download') #HTML + java are normal
 						URI.join(prefix, _dl.attribute('href').value).to_s 		
 					rescue NoMethodError => e
-						return :no_url
+						:no_url
 					end	
 				end			
 			)
